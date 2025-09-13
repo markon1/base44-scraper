@@ -16,7 +16,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
             chrome.storage.local.set({ authHeader: authHeader.value });
         }
     },
-    { urls: ["https://app.base44.com/*"] },
+    { urls: ["https://app.base44.com/*", "*://base44.app/apps/*"] },
     ["requestHeaders"]
 );
 

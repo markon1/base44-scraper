@@ -1,10 +1,10 @@
 {
 	"manifest_version": 3,
 	"name": "Base44 Scraper",
-	"version": "1.0",
+	"version": "1.0.0",
 	"description": "Extension to scrape data from app.base44.com",
 	"permissions": ["activeTab", "webRequest", "storage"],
-	"host_permissions": ["*://app.base44.com/*"],
+	"host_permissions": ["*://app.base44.com/*", "*://base44.app/apps/*"],
 	"action": {
 		"default_icon": {
 			"128": "icon.png"
