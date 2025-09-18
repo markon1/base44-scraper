@@ -19,11 +19,12 @@
 		{
 			"matches": ["*://app.base44.com/*"],
 			"js": ["content.js"],
+			"css": ["notification.css"],
 			"run_at": "document_start"
 		}
 	],
 	"web_accessible_resources": [{
-		"resources": ["popup.js", "popup.html"],
+		"resources": ["popup.js", "popup.html", "notification.css"],
 		"matches": ["<all_urls>"]
   }]
 }

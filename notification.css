@@ -1,0 +1,105 @@
+/* Notification container */
+.base44-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    overflow: hidden;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.base44-notification.visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Header */
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.notification-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: #212529;
+    margin: 0;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #6c757d;
+    padding: 0;
+    line-height: 1;
+}
+
+.close-button:hover {
+    color: #212529;
+}
+
+/* Content */
+.notification-content {
+    padding: 16px;
+}
+
+.upload-progress {
+    margin-bottom: 8px;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 6px;
+    background-color: #e9ecef;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #0d6efd;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.upload-status {
+    font-size: 13px;
+    color: #6c757d;
+    margin-top: 4px;
+}
+
+/* Success state */
+.notification-success .progress-bar {
+    background-color: #198754;
+}
+
+/* Error state */
+.notification-error .progress-bar {
+    background-color: #dc3545;
+}
+
+/* Animation */
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
