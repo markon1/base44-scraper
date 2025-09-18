@@ -1,22 +1,22 @@
-// Listen for toolbar button click
-chrome.action.onClicked.addListener((tab) => {
-    // Check if we're on a base44.com page
-    if (tab.url && tab.url.includes('app.base44.com')) {
-        // Send a message to the content script
-        chrome.tabs.sendMessage(tab.id, { action: "buttonClicked" });
-    } else {
-        console.log("This extension only works on app.base44.com");
-    }
-});
+chrome.webRequest.onBeforeSendHeaders.addListener(
+    (details) => {
+        const authHeader = details.requestHeaders.find(h => h.name.toLowerCase() === "authorization");
+        if (authHeader) {
+            chrome.storage.local.set({ base44comAuthHeader: authHeader.value });
+        }
+    },
+    { urls: ["https://app.base44.com/*"] },
+    ["requestHeaders"]
+);
 
 chrome.webRequest.onBeforeSendHeaders.addListener(
     (details) => {
         const authHeader = details.requestHeaders.find(h => h.name.toLowerCase() === "authorization");
         if (authHeader) {
-            chrome.storage.local.set({ authHeader: authHeader.value });
+            chrome.storage.local.set({ base44AppAuthHeader: authHeader.value });
         }
     },
-    { urls: ["https://app.base44.com/*"] },
+    { urls: ["https://base44.app/*"] },
     ["requestHeaders"]
 );
 

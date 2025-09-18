@@ -1,13 +1,13 @@
 // Listen for messages from the background script
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === "buttonClicked") {
+    if (request.action === "scrape") {
         const id = document.location.href.split('/apps/')[1].split('/')[0];
         const apiURL = `https://app.base44.com/api/apps/${id}`;
 
-        chrome.storage.local.get('authHeader', (result) => {
+        chrome.storage.local.get('base44comAuthHeader', (result) => {
             fetch(apiURL, {
                 headers: {
-                    'Authorization': result.authHeader
+                    'Authorization': result.base44comAuthHeader
                 }
             })
                 .then(response => response.json())
@@ -38,6 +38,39 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 .catch(error => {
                     console.error(error);
                 });
+        });
+    } else if (request.action === "importCSVs") {
+        chrome.storage.local.get('base44AppAuthHeader', (result) => {
+            request.files.forEach(file => {
+                const id = document.location.href.split('/apps/')[1].split('/')[0];
+                const entityId = file.name.replace("SecureFiles__", "").replace('.csv', '');
+                const apiURL = `https://base44.app/api/apps/${id}/entities/${entityId}/import`;
+
+                const formData = new FormData();
+                const blob = new Blob([atob(file.content)], { type: 'text/csv' });
+                formData.append('file', blob, file.name);
+
+                fetch(apiURL, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Authorization': result.base44AppAuthHeader
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+                
+            });
         });
     }
 });

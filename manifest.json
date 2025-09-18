@@ -4,12 +4,13 @@
 	"version": "1.0.0",
 	"description": "Extension to scrape data from app.base44.com",
 	"permissions": ["activeTab", "webRequest", "storage"],
-	"host_permissions": ["*://app.base44.com/*"],
+	"host_permissions": ["*://app.base44.com/*", "*://base44.app/*"],
 	"action": {
 		"default_icon": {
 			"128": "icon.png"
 		},
-		"default_title": "Click to scrape data"
+		"default_title": "Base44 Scraper",
+		"default_popup": "popup.html"
 	},
 	"background": {
 		"service_worker": "background.js"
@@ -20,5 +21,9 @@
 			"js": ["content.js"],
 			"run_at": "document_start"
 		}
-	]
+	],
+	"web_accessible_resources": [{
+		"resources": ["popup.js", "popup.html"],
+		"matches": ["<all_urls>"]
+  }]
 }
