@@ -118,7 +118,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             const uploadPromises = request.files.map((file, index) => {
                 return new Promise((resolve, reject) => {
                     const id = document.location.href.split('/apps/')[1].split('/')[0];
-                    const entityId = file.name.replace("SecureFiles__", "").replace('.csv', '');
+                    const entityId = file.name.replace("SecureFiles__", "").replace('_export.csv', '').replace('.csv', '');
                     const apiURL = `https://base44.app/api/apps/${id}/entities/${entityId}/import`;
 
                     const formData = new FormData();

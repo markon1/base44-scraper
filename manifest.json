@@ -1,6 +1,6 @@
 {
 	"manifest_version": 3,
-	"name": "Base44 Scraper",
+	"name": "Base44 Assistant",
 	"version": "1.0.0",
 	"description": "Extension to scrape data from app.base44.com",
 	"permissions": ["activeTab", "webRequest", "storage"],
@@ -9,7 +9,7 @@
 		"default_icon": {
 			"128": "icon.png"
 		},
-		"default_title": "Base44 Scraper",
+		"default_title": "Base44 Assistant",
 		"default_popup": "popup.html"
 	},
 	"background": {
